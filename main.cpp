@@ -5,7 +5,7 @@
 int main() {
     std::ofstream infofile;
     infofile.open("HeatSystemInfo.csv");
-    int _m=5,_n=5;
+    int _m=10,_n=10;
     double initialT=100.0, _dt=0.01, _tf=100.0;
     infofile << "#size_m, size_n,initialT,time_step,time_final,total_runs," << std::endl;
 
