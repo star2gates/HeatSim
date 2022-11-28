@@ -1,11 +1,22 @@
 #include <iostream>
+#include <fstream>
 #include "HeatSystem.h"
 
 int main() {
-    Matrix mat(5,5);
-    mat.set(2,2, 10);
-    std::cout << "Hello, World!" << std::endl;
-    HeatSystem system1(std::make_unique<Matrix>(mat),0.01);
-    system1.simulate(10);
+    std::ofstream infofile;
+    infofile.open("HeatSystemInfo.txt");
+    int _m=5,_n=5;
+    double initialT=10.0, _dt=0.01, _tf=10.0;
+    infofile << "#size_m, size_n,initialT,time_step,time_final,total_runs," << std::endl;
+
+    Matrix mat(_m,_n);
+    mat.set(2,2, initialT);
+    std::cout << "Hello, World!\nRunning simulation!" << std::endl;
+    HeatSystem system1(std::make_unique<Matrix>(mat),_dt);
+    system1.simulate(_tf);
+
+    infofile << _m << "," << _n << "," << initialT << "," << _dt << "," << _tf << "," << system1.total_runs << "," << std::endl;
+    infofile.close();
+
     return 0;
 }

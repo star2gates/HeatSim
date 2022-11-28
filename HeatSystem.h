@@ -18,6 +18,7 @@ class HeatSystem {
 public:
     HeatSystem(std::unique_ptr<Matrix>, double dt);
     auto simulate(double tf) -> void;
+    int total_runs = 0;
 private:
 
     std::unique_ptr<Matrix> system;

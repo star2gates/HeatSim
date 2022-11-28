@@ -10,6 +10,7 @@
 #include <utility>
 #include <fstream>
 #include <memory>
+#include <iostream>
 
 HeatSystem::HeatSystem(std::unique_ptr<Matrix> system, double dt) : system( std::move(system)), dt(dt) {
 
@@ -23,11 +24,20 @@ auto HeatSystem::simulate(double tf) -> void {
     if (!outfile.is_open())
         throw std::runtime_error("Error! output file not open");
 
+    // print the start and '#' so python ignores line
+    outfile << "# Start @ 0" << std::endl;
+    // write initial data
+    write(outfile);
+    // to count how many times run
+
     while(time_elapsed <= tf){
         update();
-        write(outfile);
         time_elapsed += dt;
+        total_runs++;
+        outfile << "#" << time_elapsed << std::endl;
+        write(outfile);
     }
+    std::cout << "total_runs=" << total_runs << std::endl;
     outfile.close();
 }
 
@@ -41,9 +51,9 @@ auto HeatSystem::write(std::ofstream &outfile) -> void {
         }
         outfile << "\n";
     }
-    outfile << "\n" << std::endl;
-
+    //outfile << "#second" << std::endl;
 }
+
 // steady state
 // no generation
 auto HeatSystem::update() -> void {
