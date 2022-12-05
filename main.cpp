@@ -10,7 +10,7 @@ int main() {
     infofile << "#size_m, size_n,initialT,time_step,time_final,total_runs," << std::endl;
 
     Matrix mat(_m,_n);
-    mat.set(0,3, _initialT);
+    mat.set(3,3, _initialT);
     std::cout << "Hello, World!\nRunning simulation!" << std::endl;
     HeatSystem system1(std::make_unique<Matrix>(mat),_dt);
     system1.initialT = _initialT;
