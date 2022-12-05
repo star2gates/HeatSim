@@ -63,6 +63,7 @@ auto HeatSystem::update() -> void {
             double new_temp = gamma * (system->get(i + 1, j) + system->get(i - 1, j) + system->get(i, j + 1)
                                        + system->get(i, j - 1) - (4 * system->get(i, j))) + system->get(i, j);
             new_system.set(i, j, new_temp);
+            new_system.set(3,3, initialT);
         }
     }
     system.reset(nullptr);
